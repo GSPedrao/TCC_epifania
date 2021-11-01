@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../Form.css">
+    <link rel="stylesheet" href="../css/Form.css">
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <!-- JavaScript Bundle with Popper -->
@@ -12,51 +12,44 @@
 
 </head>
 <body>
-    <div class="container register">
+    <div class="register">
         <div class="row">
             <div class="col-md-3 register-left">
-                <img src="../imgs/logo-colegios-maristas-vertical-Branco.png" alt=""/>
+                <!--Logo e comentários-->
+                <img src="../imgs/logo-colegios-maristas-vertical-Branco.png" alt=""/> 
                 <h3>Welcome</h3>
                 <p>You are 30 seconds away from earning your own money!</p>
-                <input type="submit" name="" value="Login"/><br/>
             </div>
             <div class="col-md-9 register-right">
-                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+              <!--  <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
                     </li>
-                </ul>
+                </ul>   --> 
+
+                <!--Login-->
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <h3 class="register-heading">Apply as a Employee</h3>
+                        <h3 class="register-heading">Login</h3>
                         <div class="row register-form">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="First Name *" value="" />
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" placeholder="Nome" value="" />
+                                    <label>Nome</label>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Last Name *" value="" />
+                                <br>
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" placeholder="Senha" value="" />
+                                    <label>Senha</label>
                                 </div>
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <input type="password" class="form-control" placeholder="Password *" value="" />
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control"  placeholder="Confirm Password *" value="" />
-                                </div>
-                                <div class="form-group">
-                                    <div class="maxl">
-                                        <label class="radio inline"> 
-                                            <input type="radio" name="gender" value="male" checked>
-                                            <span> Male </span> 
-                                        </label>
-                                        <label class="radio inline"> 
-                                            <input type="radio" name="gender" value="female">
-                                            <span>Female </span> 
-                                        </label>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -76,10 +69,15 @@
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Enter Your Answer *" value="" />
-                                </div>
-                                <input type="submit" class="btnRegister"  value="Register"/>
+                                </div> -->
+                                <input type="submit" class="btnLogar"  value="Logar"/>
                             </div>
                         </div>
+
+
+
+                         <!--Segundo cadastro-->
+
                     </div>
                     <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3  class="register-heading">Apply as a Hirer</h3>
@@ -118,7 +116,7 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="`Answer *" value="" />
                                 </div>
-                                <input type="submit" class="btnRegister"  value="Register"/>
+                                <input type="submit" class="btnRegister"  value="Logar"/>
                             </div>
                         </div>
                     </div>
@@ -126,6 +124,6 @@
             </div>
         </div>
     
-    </div>	
+    	
 </body>
 </html>
