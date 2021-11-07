@@ -82,12 +82,18 @@
              //verificar se está vazio
              if(!empty($nome) && !empty($senha))
             {
-                $u->conectar("sistema","localhost","root","");
-                if ($u->msgErro == "")
+                $u->conectar("sistema","localhost","root",""); //conectar com o banco
+                if ($u->msgErro == "") //verificar erro
                 {
                     if($u->logar($nome, $senha))
                     {
-                        header("location: php/Privado.php"); 
+                        if($nome == "Joao") //verificar seu nível de acesso
+                        {
+                            header("location: Html/Lista.html");
+                        }else{
+                            header("location: Html/form.html");
+                        }
+                        
                     }
                     else
                     {
