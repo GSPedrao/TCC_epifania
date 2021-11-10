@@ -15,8 +15,8 @@ Class Usuario
         $msgErro = $e->getMessage(); //caso de erro
         }
     }   
-
-    public function cadastrar($nome, $senha)
+ 
+   /* public function cadastrar($nome, $senha)
     {
         global $pdo;
         //verificar se já está cadastrado
@@ -39,14 +39,15 @@ Class Usuario
 
         
 
-    }
+    }*/
 
-    public function logar($nome, $senha)
+    public function logar($nome, $senha, $nivel)
     {
         global $pdo;
          //verificar se já está cadastrado
-         $sql = $pdo->prepare("SELECT id_usuario FROM login WHERE nome = :n AND senha = :s"); 
+         $sql = $pdo->prepare("SELECT id_usuario FROM login WHERE nome = :n AND senha = :s AND nivel = :l"); 
          $sql->bindValue(":n", $nome);
+         $sql->bindValue(":l", $nivel);
          $sql->bindValue(":s",md5($senha));  //md5 : Criptografa a senha
          $sql->execute();
          if($sql->rowCount() > 0)
@@ -55,6 +56,7 @@ Class Usuario
               $dado = $sql->fetch();
               session_start();  
               $_SESSION['id_usuario'] = $dado['id_usuario'];
+              $_SESSION['nivel'] = $dado['nivel'];
               return true; //Logado com sucesso
          }
          else

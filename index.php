@@ -78,16 +78,16 @@
          if(isset($_POST['nome']))
         {
              $nome = addslashes($_POST['nome']);
-             $senha = addslashes($_POST['senha']);  
+             $senha = addslashes($_POST['senha']);
              //verificar se está vazio
              if(!empty($nome) && !empty($senha))
             {
                 $u->conectar("sistema","localhost","root",""); //conectar com o banco
                 if ($u->msgErro == "") //verificar erro
                 {
-                    if($u->logar($nome, $senha))
+                    if($u->logar($nome, $senha, $nivel))
                     {
-                        if($nome == "Joao") //verificar seu nível de acesso
+                        if($nivel == 2) //verificar seu nível de acesso
                         {
                             header("location: Html/Lista.html");
                         }else{
@@ -97,7 +97,7 @@
                     }
                     else
                     {
-                        echo "Nome e/ou Senha estão incoretos!!";
+                        echo "Nome e/ou Senha estão incoretos!!";   
                     }
                 }
                 else
