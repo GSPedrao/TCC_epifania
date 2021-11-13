@@ -3,7 +3,7 @@
     $u = new Usuario;
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -85,6 +85,11 @@
                 $u->conectar("sistema","localhost","root",""); //conectar com o banco
                 if ($u->msgErro == "") //verificar erro
                 {
+<<<<<<< HEAD
+                    if(!$u->logar($nome, $senha));
+                    {
+                        echo "Nome e/ou senha incorretos";
+=======
                     if($u->logar($nome, $senha, $nivel))
                     {
                         if($nivel == 2) //verificar seu nível de acesso
@@ -98,6 +103,7 @@
                     else
                     {
                         echo "Nome e/ou Senha estão incoretos!!";   
+>>>>>>> 4c7c5d55169f9f8d3837d999f6af4636c0b17999
                     }
                 }
                 else

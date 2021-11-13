@@ -4,6 +4,7 @@ Class Usuario
 {
     private $pdo;  // oque fará acesso ao banco de dados
     public $msgErro = ""; 
+   
 
     public function conectar($nome, $host, $usuario, $senha)
     {
@@ -15,6 +16,10 @@ Class Usuario
         $msgErro = $e->getMessage(); //caso de erro
         }
     }   
+<<<<<<< HEAD
+
+  
+=======
  
    /* public function cadastrar($nome, $senha)
     {
@@ -40,6 +45,7 @@ Class Usuario
         
 
     }*/
+>>>>>>> 4c7c5d55169f9f8d3837d999f6af4636c0b17999
 
     public function logar($nome, $senha, $nivel)
     {
@@ -53,10 +59,38 @@ Class Usuario
          if($sql->rowCount() > 0)
          {
               //Entrar
-              $dado = $sql->fetch();
+              $dado = $sql->fetch(); 
               session_start();  
               $_SESSION['id_usuario'] = $dado['id_usuario'];
+<<<<<<< HEAD
+
+  
+              $verificar = $pdo->query("SELECT * FROM login");
+              while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){
+                 if($linha['nome'] == $nome){ 
+                  $nivel = $linha['nivel'];
+                  switch ($nivel) {
+                    case '2':
+                        header("location: ./Html/Lista.html");
+                    break;
+
+                    case '1':
+                        header("location: ./Html/form.html");
+                    break;
+
+                default:
+                    echo "Usuario sem acesso";
+                    break;
+                   }  
+
+                  }
+                }
+                
+
+              
+=======
               $_SESSION['nivel'] = $dado['nivel'];
+>>>>>>> 4c7c5d55169f9f8d3837d999f6af4636c0b17999
               return true; //Logado com sucesso
          }
          else
