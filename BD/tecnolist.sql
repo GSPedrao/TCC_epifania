@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Nov-2021 às 18:38
+-- Tempo de geração: 19-Nov-2021 às 18:38
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.10
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `sistema`
+-- Banco de dados: `tecnolist`
 --
 
 -- --------------------------------------------------------
@@ -39,8 +39,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id_usuario`, `nome`, `senha`, `nivel`) VALUES
-(2, 'joao', '202cb962ac59075b964b07152d234b70', 2),
-(4, 'pedrinho', '202cb962ac59075b964b07152d234b70', 1);
+(1, 'joao', '202cb962ac59075b964b07152d234b70', 2),
+(2, 'pedrinho', '202cb962ac59075b964b07152d234b70', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -50,8 +50,7 @@ INSERT INTO `login` (`id_usuario`, `nome`, `senha`, `nivel`) VALUES
 -- Índices para tabela `login`
 --
 ALTER TABLE `login`
-  ADD PRIMARY KEY (`id_usuario`),
-  ADD UNIQUE KEY `nome` (`nome`);
+  ADD PRIMARY KEY (`id_usuario`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -61,7 +60,7 @@ ALTER TABLE `login`
 -- AUTO_INCREMENT de tabela `login`
 --
 ALTER TABLE `login`
-  MODIFY `id_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_usuario` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

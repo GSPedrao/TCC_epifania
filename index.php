@@ -82,7 +82,7 @@
              //verificar se está vazio
              if(!empty($nome) && !empty($senha))
             {
-                $u->conectar("sistema","localhost","root",""); //conectar com o banco
+                $u->conectar("tecnolist","localhost","root",""); //conectar com o banco
                 if ($u->msgErro == "") //verificar erro
                 {
                     if(!$u->logar($nome, $senha));
