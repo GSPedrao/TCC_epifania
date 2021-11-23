@@ -34,7 +34,7 @@ Class Usuario
               $_SESSION['id_usuario'] = $dado['id_usuario'];
 
   
-              $verificar = $pdo->query("SELECT * FROM login");
+              $verificar = $pdo->query("SELECT * FROM login"); 
               while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){
                  if($linha['nome'] == $nome){ 
                   $nivel = $linha['nivel'];
