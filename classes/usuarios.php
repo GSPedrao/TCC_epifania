@@ -22,7 +22,7 @@ Class Usuario
     {
         global $pdo;
          //verificar se já está cadastrado
-         $sql = $pdo->prepare("SELECT id_usuario FROM login WHERE nome = :n AND senha = :s"); 
+         $sql = $pdo->prepare("SELECT id_usuario FROM usuario WHERE nome = :n AND senha = :s"); 
          $sql->bindValue(":n", $nome);
          $sql->bindValue(":s",md5($senha));  //md5 : Criptografa a senha
          $sql->execute();
@@ -34,9 +34,9 @@ Class Usuario
               $_SESSION['id_usuario'] = $dado['id_usuario'];
 
   
-              $verificar = $pdo->query("SELECT * FROM login"); 
-              while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){
-                 if($linha['nome'] == $nome){ 
+              $verificar = $pdo->query("SELECT * FROM grupo_de_usuario"); //procura tabela para nivel de acesso
+              while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //Verifica PDO
+                 if($linha['id_grupo']){ 
                   $nivel = $linha['nivel'];
                   switch ($nivel) {
                     case '2':
