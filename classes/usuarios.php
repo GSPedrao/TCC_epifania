@@ -17,6 +17,30 @@ Class Usuario
         }
     }   
 
+
+    public function cadastrar($nome, $senha){
+        
+        global $pdo; //verifica se já está cadastrado 
+
+        $sql = $pdo->prepare("SELECT id_usuario from usuario where nome = :n"); //procura se já existe um usuario cadastrado
+        $sql->bindValue(":n", $nome);
+        $sql->execute();
+
+        if($sql->rowCount() > 0)
+        {
+            return false; //já cadastrado
+        }else{
+            //se não, cadastrar
+            $sql = $pdo->prepare("INSERT INTO usuario (nome, senha) VALUES (:n, :s");
+            $sql->bindValue(":n", $nome);
+            $sql->bindValue(":s",md5( $nome)); //md5 : Criptografa a senha
+            $sql->execute();
+
+            return true;  
+        }
+        
+    }
+
     
     public function logar($nome, $senha)
     {
@@ -36,15 +60,15 @@ Class Usuario
 
   
               $verificar = $pdo->query("SELECT * FROM usuario_grupo"); //procura coluna para nivel de acesso
-              while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //Verifica PDO
-                 if($linha['id_gdu']){   //se variavel linha for igual ao nome
-                  $nivel = $linha['nivel']; // linha recebe valor da coluna nivel
-                  switch ($nivel) {  
+              while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //enquanto 
+                 if($linha['id_usuario'] == $_SESSION['id_usuario']){   //se variavel linha for igual ao nome
+                  $nivel = $linha['id_grupo_de_usuario']; // linha recebe valor da coluna nivel
+                  switch ($nivel) {
                     case '2':
                         header("location: ./php/Lista.php");   
                     break;
 
-                    case '1':
+                    case '3':
                         header("location: ./php/form.php");
                     break;
 

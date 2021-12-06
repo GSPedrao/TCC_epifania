@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="aa">
+        <form>
+            <div class="nome">
+                <label type="text" aria-placeholder="Digite seu nome">Nome</label>
+                <input type="text" name="nome" id="nome">
+            </div>
+            <br>
+            <div class="senha">
+                <label type="password" aria-placeholder="Digite sua senha">Senha</label>
+                <input type="password" name="senha" id="senha">
+            </div>
+            <br>
+            <div class="confirma">
+                <label type="password" aria-placeholder="Confirme sua senha">Confirmar sua senha</label>
+                <input type="password" name="confirma" id="confirma">
+            </div>
+            <br>
+            <select class="form-select" aria-label="Default select example">
+                <label type="select">Grupo de usuario</label>
+                <option value="1">Colaborador</option>
+                <option value="2">Tecnico</option>
+            </select>
+            <br>
+            <button style="border-radius: 30px;" class="btn btn-primary" type="submit">Salvar</button>
+        </form>
+    </div>
+</body>
+</html>
