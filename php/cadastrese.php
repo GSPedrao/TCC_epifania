@@ -1,3 +1,8 @@
+<?php
+  require_once("../classes/usuarios.php");
+  $u = new Usuario;
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,9 +17,9 @@
 </head>
 <body>
     <div class="aa">
-        <form>
+        <form method="POST">
             <div class="nome">
-                <label type="text" aria-placeholder="Digite seu nome">Nome</label>
+                <label type="text" aria-placeholder= "Digite seu nome">Nome</label>
                 <input type="text" name="nome" id="nome">
             </div>
             <br>
@@ -25,10 +30,10 @@
             <br>
             <div class="confirma">
                 <label type="password" aria-placeholder="Confirme sua senha">Confirmar sua senha</label>
-                <input type="password" name="confirma" id="confirma">
+                <input type="password" name="csenha" name="confirma" id="confirma">
             </div>
             <br>
-            <select class="form-select" aria-label="Default select example">
+            <select class="form-select" name="grupo" aria-label="Default select example">
                 <label type="select">Grupo de usuario</label>
                 <option value="1">Colaborador</option>
                 <option value="2">Tecnico</option>
@@ -39,3 +44,39 @@
     </div>
 </body>
 </html>
+
+<?php
+   //vereficar se clicou no nome
+   if(isset($_POST['nome'])){
+       $nome = addslashes($_POST['nome']);
+       $senha = addslashes($_POST['senha']);
+       $csenha = addslashes($_POST['csenha']);
+       $grupo = addslashes($_POST['grupo']);
+       
+   
+
+      if(!empty($nome) && !empty($senha) && !empty($csenha) && !empty($grupo)){
+          $u->conectar("tecnolist", "localhost", "root", "");
+
+          if($u->msgErro == ""){
+              if($senha == $csenha){
+                  if($u->cadastrar($nome, $senha, $grupo)){
+                      $_SESSION['msg'] = "<script>alert('cadastro com sucesso!');</script>";
+                   }else{
+                       echo "<script>alert('Usuario já cadastrado!');</script>";
+                    }
+               }else{
+               echo "<script>alert('Senha e confirmar senha não correspondem!');</script>";
+               }
+           
+            }else{
+           echo "Erro: " . $u->msgErro;
+           }
+        
+        
+   
+        }else{
+           echo "<script>alert('Preencha todos os campos!');</script>";
+        }
+   }
+?>

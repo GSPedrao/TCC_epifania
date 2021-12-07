@@ -18,7 +18,7 @@ Class Usuario
     }   
 
 
-    public function cadastrar($nome, $senha){
+    public function cadastrar($nome, $senha, $grupo){
         
         global $pdo; //verifica se já está cadastrado 
 
@@ -58,7 +58,8 @@ Class Usuario
               session_start();  
               $_SESSION['id_usuario'] = $dado['id_usuario'];
 
-  
+ 
+              //nivel de acesso
               $verificar = $pdo->query("SELECT * FROM usuario_grupo"); //procura coluna para nivel de acesso
               while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //enquanto 
                  if($linha['id_usuario'] == $_SESSION['id_usuario']){   //se variavel linha for igual ao nome
