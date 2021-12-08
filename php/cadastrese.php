@@ -1,5 +1,6 @@
 <?php
   require_once("../classes/usuarios.php");
+  include_once('conecao.php');
   $u = new Usuario;
 ?>
 
@@ -33,13 +34,20 @@
                 <input type="password" name="csenha" name="confirma" id="confirma">
             </div>
             <br>
-            <select class="form-select" name="grupo" aria-label="Default select example">
-                <label type="select">Grupo de usuario</label>
-                <option value="1">Colaborador</option>
-                <option value="2">Tecnico</option>
+            <select class="form-select" name="selecionaGrupo" aria-label="Default select example">
+                <option>selecione</option>
+                <?php
+                    $resultadoGrupo = "SELECT * FROM grupo_de_usuario";
+                    $re_grupo = mysqli_query($mysqli, $resultadoGrupo);
+                    while($row_grupo = mysqli_fetch_assoc($re_grupo)){ ?>
+                         <option value="<?php echo $row_grupo['id_grupo']?>">
+                         <?php echo $row_grupo['nome_grupo']; ?>
+                         </option> <?php
+                    }
+                ?>
             </select>
             <br>
-            <button style="border-radius: 30px;" class="btn btn-primary" type="submit">Salvar</button>
+          <input style="border-radius: 30px;" class="btn btn-primary" type="button" value="salvar">Salvar</input>
         </form>
     </div>
 </body>
