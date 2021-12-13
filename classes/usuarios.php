@@ -20,7 +20,9 @@ Class Usuario
 
     public function cadastrar($nome, $senha, $grupo){
         
-        global $pdo; //verifica se já está cadastrado 
+        //verifica se já está cadastrado 
+        global $pdo; 
+        global $msgErro;
 
         $sql = $pdo->prepare("SELECT id_usuario from usuario where nome = :n"); //procura se já existe um usuario cadastrado
         $sql->bindValue(":n", $nome);
@@ -31,9 +33,10 @@ Class Usuario
             return false; //já cadastrado
         }else{
             //se não, cadastrar
-            $sql = $pdo->prepare("INSERT INTO usuario (nome, senha) VALUES (:n, :s");
+            $sql = $pdo->prepare("INSERT INTO usuario (nome, senha, id_grupo) VALUES (:n, :s, :g");
             $sql->bindValue(":n", $nome);
-            $sql->bindValue(":s",md5( $nome)); //md5 : Criptografa a senha
+            $sql->bindValue(":s",md5($senha)); //md5 : Criptografa a senha
+            $sql->bindValue(":n", $grupo);
             $sql->execute();
 
             return true;  
@@ -45,7 +48,6 @@ Class Usuario
     public function logar($nome, $senha)
     {
         global $pdo;
-        global $msgErro;
          //verificar se já está cadastrado
          $sql = $pdo->prepare("SELECT id_usuario FROM usuario WHERE nome = :n AND senha = :s"); 
          $sql->bindValue(":n", $nome);

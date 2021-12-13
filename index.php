@@ -54,17 +54,17 @@
                 {
                     if(!$u->logar($nome, $senha));
                     {
-                        echo "Nome e/ou senha incorretos";
+                        echo "<script>alert('Nome e/ou senha incorretos'</script>";
                     }
                 }
                 else
                 {
-                    echo "Erro: ".$u->msgErro;  
+                    echo "Erro: " . $u->msgErro;  
                 }
             }
             else
             {
-                echo "Preencha todos os campos obrigatórios!!";
+                echo "<script>alert('Preencha todos os campos obrigatórios!!')</script>";
             }   
             
             

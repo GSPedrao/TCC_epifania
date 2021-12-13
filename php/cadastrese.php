@@ -1,6 +1,6 @@
 <?php
   require_once("../classes/usuarios.php");
-  include_once('conecao.php');
+  include_once("conecao.php");
   $u = new Usuario;
 ?>
 
@@ -18,6 +18,14 @@
 </head>
 <body>
     <div class="aa">
+        <?php
+
+    if(isset($_SESSION['msg'])){
+        echo $_SESSION['msg'];
+        unset($_SESSION['msg']);
+    }
+    ?>
+
         <form method="POST">
             <div class="nome">
                 <label type="text" aria-placeholder= "Digite seu nome">Nome</label>
@@ -34,11 +42,12 @@
                 <input type="password" name="csenha" name="confirma" id="confirma">
             </div>
             <br>
-            <select class="form-select" name="selecionaGrupo" aria-label="Default select example">
-                <option>selecione</option>
+            <label>Selecione o grupo de usuario</label>
+            <select class="form-select" name="selecionaGrupo"  aria-label="Default select example">
+                <option></option>
                 <?php
                     $resultadoGrupo = "SELECT * FROM grupo_de_usuario";
-                    $re_grupo = mysqli_query($mysqli, $resultadoGrupo);
+                    $re_grupo = mysqli_query($conn, $resultadoGrupo);
                     while($row_grupo = mysqli_fetch_assoc($re_grupo)){ ?>
                          <option value="<?php echo $row_grupo['id_grupo']?>">
                          <?php echo $row_grupo['nome_grupo']; ?>
@@ -47,11 +56,12 @@
                 ?>
             </select>
             <br>
-          <input style="border-radius: 30px;" class="btn btn-primary" type="button" value="salvar">Salvar</input>
+          <input style="border-radius: 30px;" class="btn btn-primary" type="submit" value="salvar"></input>
         </form>
     </div>
 </body>
 </html>
+
 
 <?php
    //vereficar se clicou no nome
@@ -59,20 +69,23 @@
        $nome = addslashes($_POST['nome']);
        $senha = addslashes($_POST['senha']);
        $csenha = addslashes($_POST['csenha']);
-       $grupo = addslashes($_POST['grupo']);
+       $grupo = addslashes($_POST['selecionaGrupo']);
        
    
 
       if(!empty($nome) && !empty($senha) && !empty($csenha) && !empty($grupo)){
           $u->conectar("tecnolist", "localhost", "root", "");
-
+              
           if($u->msgErro == ""){
+
               if($senha == $csenha){
+
                   if($u->cadastrar($nome, $senha, $grupo)){
                       $_SESSION['msg'] = "<script>alert('cadastro com sucesso!');</script>";
                    }else{
                        echo "<script>alert('Usuario já cadastrado!');</script>";
                     }
+
                }else{
                echo "<script>alert('Senha e confirmar senha não correspondem!');</script>";
                }
