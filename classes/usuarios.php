@@ -18,7 +18,7 @@ Class Usuario
     }   
 
 
-    public function cadastrar($nome, $senha){
+    public function cadastrar($nome, $senha, $grupo){
         
         //verifica se já está cadastrado 
         global $pdo; 
@@ -33,9 +33,10 @@ Class Usuario
             return false; //já cadastrado
         }else{
             //se não, cadastrar
-            $sql = $pdo->prepare("INSERT INTO usuario (nome, senha) VALUES (:n, :s)");
+            $sql = $pdo->prepare("INSERT INTO usuario (nome, senha, id_grupo) VALUES (:n, :s, :g)");
             $sql->bindValue(":n", $nome);
             $sql->bindValue(":s",md5($senha)); //md5 : Criptografa a senha
+            $sql->bindValue(":g", $grupo);
             $sql->execute();
 
             return true;  

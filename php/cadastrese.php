@@ -18,13 +18,6 @@
 </head>
 <body>
     <div class="aa">
-        <?php
-
-    if(isset($_SESSION['msg'])){
-        echo $_SESSION['msg'];
-        unset($_SESSION['msg']);
-    }
-    ?>
 
         <form method="POST">
             <div class="nome">
@@ -80,8 +73,8 @@
 
               if($senha == $csenha){
 
-                  if($u->cadastrar($nome, $senha)){
-                      $_SESSION['msg'] = "<script>alert('cadastro com sucesso!');</script>";
+                  if($u->cadastrar($nome, $senha, $grupo)){
+                     echo "<script>alert('Usuario cadastrado com sucesso')</script>"
                    }else{
                        echo "<script>alert('Usuario já cadastrado!');</script>";
                     }
