@@ -59,13 +59,12 @@ Class Usuario
               $dado = $sql->fetch(); 
               session_start();  
               $_SESSION['id_usuario'] = $dado['id_usuario'];
-
  
               //nivel de acesso
-              $verificar = $pdo->query("SELECT * FROM usuario_grupo"); //procura coluna para nivel de acesso
+              $verificar = $pdo->query("SELECT * FROM usuario"); //procura coluna para nivel de acesso
               while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //enquanto 
-                 if($linha['id_usuario'] == $_SESSION['id_usuario']){   //se variavel linha for igual ao nome
-                  $nivel = $linha['id_grupo_de_usuario']; // linha recebe valor da coluna nivel
+                 if($linha['nome'] == $nome){   //se variavel linha for igual ao nome
+                  $nivel = $linha['id_grupo']; // linha recebe valor da coluna nivel
                   switch ($nivel) {
                     case '2':
                         header("location: ./php/Lista.php");   
