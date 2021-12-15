@@ -80,7 +80,7 @@
 
               if($senha == $csenha){
 
-                  if($u->cadastrar($nome, $senha, $grupo)){
+                  if($u->cadastrar($nome, $senha)){
                       $_SESSION['msg'] = "<script>alert('cadastro com sucesso!');</script>";
                    }else{
                        echo "<script>alert('Usuario já cadastrado!');</script>";
