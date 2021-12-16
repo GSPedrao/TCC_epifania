@@ -2,6 +2,12 @@
   require_once("../classes/usuarios.php");
   include_once("conecao.php");
   $u = new Usuario;
+  session_start();
+  if(!isset($_SESSION['id_usuario']))
+  {
+      header("location: ../index.php");
+      exit;
+  }   
 ?>
 
 <!DOCTYPE html>
@@ -74,7 +80,7 @@
               if($senha == $csenha){
 
                   if($u->cadastrar($nome, $senha, $grupo)){
-                     echo "<script>alert('Usuario cadastrado com sucesso')</script>"
+                     echo "<script>alert('Usuario cadastrado com sucesso')</script>";
                    }else{
                        echo "<script>alert('Usuario já cadastrado!');</script>";
                     }

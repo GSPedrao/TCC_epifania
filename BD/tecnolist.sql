@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Dez-2021 às 18:30
+-- Tempo de geração: 16-Dez-2021 às 18:22
 -- Versão do servidor: 10.4.21-MariaDB
 -- versão do PHP: 8.0.10
 
@@ -103,34 +103,19 @@ CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
   `senha` varchar(32) NOT NULL,
-  `ativo` binary(1) NOT NULL
+  `ativo` binary(1) DEFAULT '1',
+  `id_grupo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id_usuario`, `nome`, `senha`, `ativo`) VALUES
-(1, 'joao', '202cb962ac59075b964b07152d234b70', 0x31);
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `usuario_grupo`
---
-
-CREATE TABLE `usuario_grupo` (
-  `id_usuario` int(11) NOT NULL,
-  `id_grupo_de_usuario` int(11) NOT NULL,
-  `id_gdu` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Extraindo dados da tabela `usuario_grupo`
---
-
-INSERT INTO `usuario_grupo` (`id_usuario`, `id_grupo_de_usuario`, `id_gdu`) VALUES
-(1, 2, 1);
+INSERT INTO `usuario` (`id_usuario`, `nome`, `senha`, `ativo`, `id_grupo`) VALUES
+(1, 'joao', '202cb962ac59075b964b07152d234b70', 0x31, 2),
+(2, 'pedro', '202cb962ac59075b964b07152d234b70', 0x31, 3),
+(10, 'Felipe', '202cb962ac59075b964b07152d234b70', 0x01, 3),
+(12, 'kaka', '202cb962ac59075b964b07152d234b70', 0x31, 3);
 
 --
 -- Índices para tabelas despejadas
@@ -175,15 +160,8 @@ ALTER TABLE `tipo`
 -- Índices para tabela `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
-
---
--- Índices para tabela `usuario_grupo`
---
-ALTER TABLE `usuario_grupo`
-  ADD PRIMARY KEY (`id_gdu`),
-  ADD KEY `fk_usuario_has_grupo_de_usuario_grupo_de_usuario1` (`id_grupo_de_usuario`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `id_grupo` (`id_grupo`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -217,13 +195,7 @@ ALTER TABLE `tipo`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT de tabela `usuario_grupo`
---
-ALTER TABLE `usuario_grupo`
-  MODIFY `id_gdu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restrições para despejos de tabelas
@@ -245,12 +217,10 @@ ALTER TABLE `chamado`
   ADD CONSTRAINT `fk_chamado_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Limitadores para a tabela `usuario_grupo`
+-- Limitadores para a tabela `usuario`
 --
-ALTER TABLE `usuario_grupo`
-  ADD CONSTRAINT `fk_usuario_has_grupo_de_usuario_grupo_de_usuario1` FOREIGN KEY (`id_grupo_de_usuario`) REFERENCES `grupo_de_usuario` (`id_grupo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_usuario_has_grupo_de_usuario_usuario1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `usuario_grupo_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
+ALTER TABLE `usuario`
+  ADD CONSTRAINT `id_grupo` FOREIGN KEY (`id_grupo`) REFERENCES `grupo_de_usuario` (`id_grupo`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

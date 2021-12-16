@@ -18,6 +18,7 @@
 </head>
 
 <body>
+   <a href="cadastrese.php">dasa</a>
     <header></header>
     <div>
         <div>
