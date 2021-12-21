@@ -1,11 +1,13 @@
 <?php
 include_once('conecao.php');
-
+include_once('../classes/usuarios.php');
 
 session_start();
 if (!isset($_SESSION['id_usuario'])) {
     header("location: ../index.php");
     exit;
+}else if($_SESSION['id_grupo'] !=2 ){
+    header("location: ../index.php");
 }
 
 $nameresult = "SELECT * from usuario";
@@ -13,7 +15,7 @@ $resultado_nome = mysqli_query($conn, $nameresult);
 $LNome = mysqli_fetch_assoc($resultado_nome);
 
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="pt-br">
 
 <head>
@@ -59,10 +61,10 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                 <input type="text" id="#" class="form-control">
                 <br>
                 <p>Descrição</p>
-                <textarea>
+                <textarea> </textarea>
 
             </div>
-            <input type="buttom">
+            <input type="button">
         </form>
     </div>
 </body>

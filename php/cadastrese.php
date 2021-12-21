@@ -7,7 +7,10 @@
   {
       header("location: ../index.php");
       exit;
-  }   
+  } else if($_SESSION['id_grupo'] !=2 ){
+    header("location: ../index.php");
+}
+  
 ?>
 
 <!DOCTYPE html>
