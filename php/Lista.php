@@ -18,7 +18,8 @@
 </head>
 
 <body>
-   <a href="cadastrese.php">dasa</a>
+   <a href="cadastrese.php">usuario</a> 
+   <a href="Cadativo.php">ativo</a>
     <header></header>
     <div>
         <div>
