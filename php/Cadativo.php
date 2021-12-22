@@ -6,16 +6,14 @@ session_start();
 if (!isset($_SESSION['id_usuario'])) {
     header("location: ../index.php");
     exit;
-}else if($_SESSION['id_grupo'] !=2 ){
-    header("location: ../index.php");
-}
+} 
 
 $nameresult = "SELECT * from usuario";
 $resultado_nome = mysqli_query($conn, $nameresult);
 $LNome = mysqli_fetch_assoc($resultado_nome);
 
 ?>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -27,7 +25,7 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
 
 <body>
     <div id="#">
-        <form>
+        <form method="POST">
             <div class="input-group mb-4" id="#">
                 <h1></h1>
                 <p>Colaborador</p>
@@ -39,7 +37,18 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                 </select>
                 <br>
                 <p>Tipo</p>
-                <input type="text" id="#" class="form-control">
+                <select>
+                    <option></option>
+                    <?php
+                    $resultadoGrupo = "SELECT * FROM tipo";
+                    $re_grupo = mysqli_query($conn, $resultadoGrupo);
+                    while ($row_grupo = mysqli_fetch_assoc($re_grupo)) { ?>
+                        <option value="<?php echo $row_grupo['id_tipo'] ?>">
+                            <?php echo $row_grupo['descricao']; ?>
+                        </option> <?php
+                                }
+                                    ?>
+                </select>
                 <br>
                 <div>
                     <label>localização</label>

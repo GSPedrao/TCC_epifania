@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 16-Dez-2021 às 18:22
--- Versão do servidor: 10.4.21-MariaDB
--- versão do PHP: 8.0.10
+-- Generation Time: 22-Dez-2021 às 19:38
+-- Versão do servidor: 10.1.38-MariaDB
+-- versão do PHP: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `tecnolist`
+-- Database: `tecnolist`
 --
 
 -- --------------------------------------------------------
@@ -32,7 +33,8 @@ CREATE TABLE `ativo` (
   `descricao` varchar(45) NOT NULL,
   `id_tipo` int(11) NOT NULL,
   `id_usuario` int(11) NOT NULL,
-  `id_localizacao` int(11) NOT NULL
+  `id_localizacao` int(11) NOT NULL,
+  `patrimonio` int(12) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -46,7 +48,7 @@ CREATE TABLE `chamado` (
   `descricao` varchar(45) NOT NULL,
   `data_abertura` datetime NOT NULL,
   `data_fechamento` datetime NOT NULL,
-  `satus` varchar(45) NOT NULL,
+  `status` varchar(45) NOT NULL,
   `id_ativo` varchar(24) NOT NULL,
   `id_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -82,6 +84,13 @@ CREATE TABLE `localizacao` (
   `descricao` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Extraindo dados da tabela `localizacao`
+--
+
+INSERT INTO `localizacao` (`id_localizacao`, `descricao`) VALUES
+(1, 'LAB01');
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +101,13 @@ CREATE TABLE `tipo` (
   `id_tipo` int(11) NOT NULL,
   `descricao` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tipo`
+--
+
+INSERT INTO `tipo` (`id_tipo`, `descricao`) VALUES
+(1, 'impressora');
 
 -- --------------------------------------------------------
 
@@ -114,15 +130,14 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id_usuario`, `nome`, `senha`, `ativo`, `id_grupo`) VALUES
 (1, 'joao', '202cb962ac59075b964b07152d234b70', 0x31, 2),
 (2, 'pedro', '202cb962ac59075b964b07152d234b70', 0x31, 3),
-(10, 'Felipe', '202cb962ac59075b964b07152d234b70', 0x01, 3),
 (12, 'kaka', '202cb962ac59075b964b07152d234b70', 0x31, 3);
 
 --
--- Índices para tabelas despejadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices para tabela `ativo`
+-- Indexes for table `ativo`
 --
 ALTER TABLE `ativo`
   ADD PRIMARY KEY (`id_ativo`,`id_usuario`),
@@ -131,7 +146,7 @@ ALTER TABLE `ativo`
   ADD KEY `fk_ativo_localizacao1` (`id_localizacao`);
 
 --
--- Índices para tabela `chamado`
+-- Indexes for table `chamado`
 --
 ALTER TABLE `chamado`
   ADD PRIMARY KEY (`id_chamada`,`id_ativo`,`id_usuario`),
@@ -139,66 +154,66 @@ ALTER TABLE `chamado`
   ADD KEY `fk_chamado_usuario1` (`id_usuario`);
 
 --
--- Índices para tabela `grupo_de_usuario`
+-- Indexes for table `grupo_de_usuario`
 --
 ALTER TABLE `grupo_de_usuario`
   ADD PRIMARY KEY (`id_grupo`);
 
 --
--- Índices para tabela `localizacao`
+-- Indexes for table `localizacao`
 --
 ALTER TABLE `localizacao`
   ADD PRIMARY KEY (`id_localizacao`);
 
 --
--- Índices para tabela `tipo`
+-- Indexes for table `tipo`
 --
 ALTER TABLE `tipo`
   ADD PRIMARY KEY (`id_tipo`);
 
 --
--- Índices para tabela `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`),
   ADD KEY `id_grupo` (`id_grupo`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `chamado`
+-- AUTO_INCREMENT for table `chamado`
 --
 ALTER TABLE `chamado`
   MODIFY `id_chamada` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `grupo_de_usuario`
+-- AUTO_INCREMENT for table `grupo_de_usuario`
 --
 ALTER TABLE `grupo_de_usuario`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `localizacao`
+-- AUTO_INCREMENT for table `localizacao`
 --
 ALTER TABLE `localizacao`
-  MODIFY `id_localizacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_localizacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `tipo`
+-- AUTO_INCREMENT for table `tipo`
 --
 ALTER TABLE `tipo`
-  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_tipo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de tabela `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Restrições para despejos de tabelas
+-- Constraints for dumped tables
 --
 
 --
