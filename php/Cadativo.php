@@ -1,18 +1,19 @@
 <?php
 include_once('conecao.php');
-include_once('../classes/usuarios.php');
+include_once('cadastroAtivo.php');
 
 session_start();
 if (!isset($_SESSION['id_usuario'])) {
     header("location: ../index.php");
     exit;
-} 
+}
 
-$nameresult = "SELECT * from usuario";
-$resultado_nome = mysqli_query($conn, $nameresult);
+$nameResult = "SELECT * from usuario";
+$resultado_nome = mysqli_query($conn, $nameResult);
 $LNome = mysqli_fetch_assoc($resultado_nome);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -25,19 +26,15 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
 
 <body>
     <div id="#">
+        <!--formulario para cadastro de ativo-->
         <form method="POST">
             <div class="input-group mb-4" id="#">
                 <h1></h1>
                 <p>Colaborador</p>
-                <input type="text" id="#" class="form-control" value="<?php echo $LNome['nome']; ?>">
-                <br>
-                <p>Informação do ativo</p>
-                <select id="#">
-                    <option value="#"></option>
-                </select>
+                <input type="text" id="#" class="form-control" name="nome" value="<?php echo $LNome['nome']; ?>">
                 <br>
                 <p>Tipo</p>
-                <select>
+                <select name="tipo">
                     <option></option>
                     <?php
                     $resultadoGrupo = "SELECT * FROM tipo";
@@ -53,7 +50,7 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                 <div>
                     <label>localização</label>
                     <br>
-                    <select>
+                    <select name="localizacao">
                         <option></option>
                         <?php
                         $resultadoGrupo = "SELECT * FROM localizacao";
@@ -67,15 +64,49 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                     </select>
                 </div>
                 <p>Patrimonio</p>
-                <input type="text" id="#" class="form-control">
+                <input type="text" id="#" class="form-control" name="patrimonio">
                 <br>
                 <p>Descrição</p>
-                <textarea> </textarea>
+                <textarea name="descricao"> </textarea>
 
             </div>
-            <input type="button">
+            <input type="submit" value="Salvar"> <!--botão para cadastro do ativo-->
         </form>
     </div>
 </body>
 
 </html>
+
+<?php
+$a = new Ativos;
+
+//vereficar se clicou no nome
+if (isset($_POST['nome'])) {
+    $descricao = addslashes($_POST['descricao']);
+    $id_tipo = addslashes($_POST['tipo']);
+    $id_usuario = addslashes($_POST['nome']);
+    $id_localizacao = addslashes($_POST['localizacao']);
+    $patrimonio = addslashes($_POST['patrimonio']);
+
+    $id_usuario = $LNome['id_usuario'];
+
+
+
+    if (!empty($descricao) && !empty($id_tipo) && !empty($id_usuario) && !empty($id_localizacao)) {
+        $a->conectar("tecnolist", "localhost", "root", "");
+
+        if ($a->msgErro == "") {
+
+            if ($a->cadastrar_ativos($descricao, $id_tipo, $id_usuario, $id_localizacao, $patrimonio)) {
+                echo "<script>alert('Ativo cadastrado com sucesso')</script>";
+            } else {
+                echo "<script>alert('Ativo já cadastrado!');</script>";
+            }
+        } else {
+            echo "Erro: " . $a->msgErro;
+        }
+    } else {
+        echo "<script>alert('Preencha todos os campos!');</script>";
+    }
+}
+?>

@@ -7,10 +7,7 @@
   {
       header("location: ../index.php");
       exit;
-  } else if($_SESSION['id_grupo'] !=2 ){
-    header("location: ../index.php");
-}
-  
+  } 
 ?>
 
 <!DOCTYPE html>
@@ -84,6 +81,7 @@
 
                   if($u->cadastrar($nome, $senha, $grupo)){
                      echo "<script>alert('Usuario cadastrado com sucesso')</script>";
+                     header("location: ../index.php");
                    }else{
                        echo "<script>alert('Usuario já cadastrado!');</script>";
                     }
