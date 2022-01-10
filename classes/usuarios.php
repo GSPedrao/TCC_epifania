@@ -59,6 +59,8 @@ Class Usuario
               $dado = $sql->fetch(); 
               session_start();  
               $_SESSION['id_usuario'] = $dado['id_usuario'];
+             
+              
  
               //nivel de acesso
               $verificar = $pdo->query("SELECT * FROM usuario"); //procura coluna para nivel de acesso
@@ -81,7 +83,6 @@ Class Usuario
 
                   }
                 }
-                
                 
 
               

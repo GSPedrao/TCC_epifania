@@ -1,6 +1,7 @@
 <?php
 include_once('conecao.php');
 include_once('cadastroAtivo.php');
+include_once('../classes/usuarios.php');
 
 session_start();
 if (!isset($_SESSION['id_usuario'])) {
@@ -8,7 +9,8 @@ if (!isset($_SESSION['id_usuario'])) {
     exit;
 }
 
-$nameResult = "SELECT * from usuario";
+
+$nameResult = "SELECT * from usuario WHERE '$_SESSION[id_usuario]' = id_usuario";
 $resultado_nome = mysqli_query($conn, $nameResult);
 $LNome = mysqli_fetch_assoc($resultado_nome);
 
@@ -64,7 +66,7 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                     </select>
                 </div>
                 <p>Patrimonio</p>
-                <input type="text" id="#" class="form-control" name="patrimonio">
+                <input type="number" id="#" class="form-control" name="patrimonio">
                 <br>
                 <p>Descrição</p>
                 <textarea name="descricao"> </textarea>
@@ -88,7 +90,7 @@ if (isset($_POST['nome'])) {
     $id_localizacao = addslashes($_POST['localizacao']);
     $patrimonio = addslashes($_POST['patrimonio']);
 
-    $id_usuario = $LNome['id_usuario'];
+    $id_usuario = $_SESSION['id_usuario'];
 
 
 
