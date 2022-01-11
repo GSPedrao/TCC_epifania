@@ -1,6 +1,6 @@
 <?php
 include_once('conecao.php');
-include_once('cadastroAtivo.php');
+include_once('../classes/ativos.php');
 include_once('../classes/usuarios.php');
 
 session_start();
@@ -12,7 +12,7 @@ if (!isset($_SESSION['id_usuario'])) {
 
 $nameResult = "SELECT * from usuario WHERE '$_SESSION[id_usuario]' = id_usuario";
 $resultado_nome = mysqli_query($conn, $nameResult);
-$LNome = mysqli_fetch_assoc($resultado_nome);
+$LNome = mysqli_fetch_assoc($resultado_nome);   
 
 ?>
 
@@ -39,11 +39,11 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                 <select name="tipo">
                     <option></option>
                     <?php
-                    $resultadoGrupo = "SELECT * FROM tipo";
-                    $re_grupo = mysqli_query($conn, $resultadoGrupo);
-                    while ($row_grupo = mysqli_fetch_assoc($re_grupo)) { ?>
-                        <option value="<?php echo $row_grupo['id_tipo'] ?>">
-                            <?php echo $row_grupo['descricao']; ?>
+                    $resultadoAtivo = "SELECT * FROM tipo";
+                    $re_ativo = mysqli_query($conn, $resultadoAtivo);
+                    while ($row_ativo = mysqli_fetch_assoc($re_ativo)) { ?>
+                        <option value="<?php echo $row_ativo['id_tipo'] ?>">
+                            <?php echo $row_ativo['descricao']; ?>
                         </option> <?php
                                 }
                                     ?>
@@ -55,11 +55,11 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                     <select name="localizacao">
                         <option></option>
                         <?php
-                        $resultadoGrupo = "SELECT * FROM localizacao";
-                        $re_grupo = mysqli_query($conn, $resultadoGrupo);
-                        while ($row_grupo = mysqli_fetch_assoc($re_grupo)) { ?>
-                            <option value="<?php echo $row_grupo['id_localizacao'] ?>">
-                                <?php echo $row_grupo['descricao']; ?>
+                        $resultadoLoc = "SELECT * FROM localizacao";
+                        $re_loc = mysqli_query($conn, $resultadoLoc);
+                        while ($row_loc = mysqli_fetch_assoc($re_loc)) { ?>
+                            <option value="<?php echo $row_loc['id_localizacao'] ?>">
+                                <?php echo $row_loc['descricao']; ?>
                             </option> <?php
                                     }
                                         ?>
