@@ -44,7 +44,7 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                 <option></option>
                 <?php
                 $resultadoAtivo = "SELECT * FROM ativo";
-                $re_ativo = mysqli_query($conn, $resultadoGrupo);
+                $re_ativo = mysqli_query($conn, $resultadoAtivo);
                 while ($row_ativo = mysqli_fetch_assoc($re_ativo)) { ?>
                     <option value="<?php echo $row_ativo['id_ativo'] ?>">
                         <?php echo $row_ativo['descricao']; ?>

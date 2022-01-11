@@ -10,7 +10,7 @@ require_once('conecao.php');
     } 
     
      $sql = "SELECT * FROM  chamado ORDER BY id_chamado DESC";
-     $result = $conn->query($sql)
+     $result = $conn->query($sql);
 
 ?>
 
@@ -62,7 +62,10 @@ require_once('conecao.php');
                         }
 
                         echo "<td>" . $chamado_data['data_abertura'] . "</td>";
-                        echo "<td>" . $chamado_data['status'] . "</td>";
+                        
+                        if($chamado_data = 1){
+                            echo "<td>Em andamento</td>";
+                        }
                     }
 
 
