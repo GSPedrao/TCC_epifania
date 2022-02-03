@@ -18,7 +18,7 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
 <!DOCTYPE html>
 <html lang="pt/br">
 
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -52,7 +52,19 @@ $LNome = mysqli_fetch_assoc($resultado_nome);
                             }
                                 ?>
             </select>
-            <br>    
+            <br>
+            <select name="tipo">
+                <option></option>
+                <?php
+                $resultadoTipo = "SELECT * FROM tipo";
+                $re_ativo = mysqli_query($conn, $resultadoTipo);
+                while ($row_ativo = mysqli_fetch_assoc($re_ativo)) { ?>
+                    <option value="<?php echo $row_ativo['id_tipo'] ?>">
+                        <?php echo $row_ativo['descricao']; ?>
+                    </option> <?php
+                            }
+                                ?>
+            </select>
 
             <input type="submit">
             </form>
