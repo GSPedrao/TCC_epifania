@@ -36,9 +36,9 @@ $result = $conn->query($sql);
 </head> 
 
 <body>
-    <a href="cadastrese.php">usuario</a>
-    <a href="Cadativo.php">ativo</a>
-    <a href="Cadativo.php">Usuarios</a>
+    <a href="cadastrese.php">cadastrar usuario</a>
+    <a href="Cadativo.php">cadastrar ativo</a>
+    <a href="Gusuarios.php">Gerenciar usuarios</a>
     <header></header>
 
     <div class="box-search"w>

@@ -89,7 +89,6 @@ if (isset($_POST['nome'])) {
 
 
     if (!empty($descricao) && !empty($id_ativo) && !empty($id_usuario)) {
-        $c->conectar("tecnolist", "localhost", "root", "");
 
         if ($c->msgErro == "") {
 

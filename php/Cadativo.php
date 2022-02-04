@@ -95,7 +95,7 @@ if (isset($_POST['nome'])) {
 
 
     if (!empty($descricao) && !empty($id_tipo) && !empty($id_usuario) && !empty($id_localizacao)) {
-        $a->conectar("tecnolist", "localhost", "root", "");
+        
 
         if ($a->msgErro == "") {
 
