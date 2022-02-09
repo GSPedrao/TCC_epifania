@@ -67,19 +67,31 @@ Class Usuario
               while ($linha = $verificar->fetch(PDO::FETCH_ASSOC)){ //enquanto 
                  if($linha['nome'] == $nome){   //se variavel linha for igual ao nome
                   $nivel = $linha['id_grupo']; // linha recebe valor da coluna nivel
-                  switch ($nivel) {
-                    case '2':
+                  $ativo = $linha['ativo']; // Recebe o valor da coluna ativo
+                  switch ($nivel && $ativo) {
+                    case ($nivel == 2 && $ativo == 1):
                         header("location: ./php/Lista.php");   
                     break;
 
-                    case '3':
+                    case ($nivel == 2 && $ativo == 2):
+                        echo "Sai da o peste";
+                    break;
+
+                    case ($nivel == 3 && $ativo == 1):
                         header("location: ./php/form.php");
+                    break;
+
+                    case ($nivel == 3 && $ativo == 2):
+                        echo "Volta pro buero";
                     break;
 
                 default:
                     echo "Usuario sem acesso";
                     break;
                    }  
+
+                    $_SESSION['ativo'] = $ativo;
+                    $_SESSION['nivel'] = $nivel;
 
                   }
                 }

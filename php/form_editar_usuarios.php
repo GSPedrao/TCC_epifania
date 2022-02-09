@@ -33,7 +33,15 @@ if(!empty($dados['usuario'])){
         extract($row_usuario);
         echo "<input type='hidden' name='id_usuario[]' value='$id_usuario'> <br><br>";
         echo "Nome: <input type='text' name='nome[]' value='$nome' placeholder='Nome do usuario'> <br><br>";
-        echo "Status: <input type='text' name='ativo[]' value='$ativo' placeholder='Status do usuario'> <br><br>";
+        if($ativo == 1) {
+            echo "Status: <select name='ativo[]' value='$ativo'>";
+            echo "<option value='1' selected>Ativo</option>";
+            echo "<option value='2'>Inativo</option></select>";
+        }else{
+            echo "Status: <select name='ativo[]' value='$ativo'>";
+            echo "<option value='1'>Ativo</option>";
+            echo "<option value='2' selected>Inativo</option></select>";
+        }
         echo "<hr>";
     }
 

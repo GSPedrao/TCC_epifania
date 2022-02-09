@@ -1,9 +1,15 @@
 <?php
-require_once('conecao.php');
-
 
 session_start();    
-if (!isset($_SESSION['id_usuario'])) {
+require_once('conecao.php');
+  
+if(!isset($_SESSION['id_usuario'])) {
+    header("location: ../index.php");
+    exit;
+} else if($_SESSION['ativo'] != 1) {
+    header("location: ../index.php");
+    exit;
+} else if($_SESSION['nivel'] != 2) {
     header("location: ../index.php");
     exit;
 }
@@ -36,6 +42,7 @@ $result = $conn->query($sql);
 </head> 
 
 <body>
+    <a href="sair.php">Sair</a>
     <a href="cadastrese.php">cadastrar usuario</a>
     <a href="Cadativo.php">cadastrar ativo</a>
     <a href="Gusuarios.php">Gerenciar usuarios</a>
@@ -54,8 +61,8 @@ $result = $conn->query($sql);
       
 
     </div>
-    <div>   
-        <div>
+    <div class="container">   
+        <div class="table-responsive">
             <table border="2">
                 <thead>
                     <tr>

@@ -9,7 +9,7 @@ include_once('conecao.php');
 $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 //var_dump($dados);
 
-// Vereficar se usuario clicou no botão
+// Verificar se usuario clicou no botão
 if (!empty($dados['editUsuarios'])) {
 
     //Ler os dados do formulário

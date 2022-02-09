@@ -50,7 +50,11 @@ if (!isset($_SESSION['id_usuario'])) {
         echo "<input type='checkbox' name='usuario[$id_usuario]' value='$id_usuario'>";
         echo "ID: $id_usuario <br>";
         echo "Nome: $nome <br>";
-        echo "Status: $ativo <br>";  
+        if($ativo == 1){
+            echo "Status: Ativo";  
+        }else{
+            echo "Status: Inativo";
+        }
         echo "<hr>";
     }
 
